@@ -33,6 +33,7 @@ class ViewModel {
         
         
         let characterData = try! Data(contentsOf: Bundle.main.url(forResource: "samplecharacter", withExtension: "json")!)
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         character = try! decoder.decode(Character.self, from: characterData)
         
         
