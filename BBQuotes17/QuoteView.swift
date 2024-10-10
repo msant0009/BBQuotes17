@@ -19,8 +19,12 @@ struct QuoteView: View {
                     .resizable()
                     .frame(width: geo.size.width*2.7, height: geo.size.height*1.2
                     )
+                
                 VStack{
+                    Spacer(minLength: 60)// keeps text box from hitting the top of teh screen with long quotes
+                    
                     Text("\"\(vm.quote.quote)\"")
+                        .minimumScaleFactor(0.5)// reduces text size if needed to fit
                         .multilineTextAlignment(.center)
                         .foregroundStyle(.white)
                         .padding()
@@ -45,10 +49,26 @@ struct QuoteView: View {
                             .frame(maxWidth: .infinity)
                             .background(.ultraThinMaterial)
                     }
-                    .frame(width: geo.size.width/1.1, height: geo.size.height/1.8)
+                    .frame(width: geo.size.width/1.3, height: geo.size.height/1.8)
                     .clipShape(.rect(cornerRadius: 50))
+                    
+                    Spacer()
+                    
+                    Button(){
+                  
+                    } label: {
+                        Text("Get Random Quote")
+                        .font(.title)
+                        .foregroundStyle(.white)
+                        .padding()
+                        .background(Color("BreakingBadGreen"))
+                        .clipShape(.rect(cornerRadius: 7))
+                        .shadow(color:Color("BreakingBadYellow"), radius: 2)
+                    }
+                    Spacer(minLength: 95)
+                    
                 }
-                .frame(width: geo.size.width)
+                .frame(width: geo.size.width, height: geo.size.height)
                 
                 
             }
