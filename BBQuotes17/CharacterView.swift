@@ -45,7 +45,7 @@ struct CharacterView: View {
                         Text("Occupations:")
                         
                         ForEach(character.occupations, id: \ .self) {occupation in
-                        Text("●\(occupation)")
+                            Text("●\(occupation)")
                                 .font(.subheadline)
                             
                         }
@@ -66,14 +66,40 @@ struct CharacterView: View {
                             Text("None")
                                 .font(.subheadline)
                         }
- 
+                        
                         Divider()
                         
+                        // add status - potential spoiler for user
                         
-                        
+                            DisclosureGroup("Status (spoiler alert!)") {
+                                VStack(alignment: .leading){
+                                Text(character.status)
+                                    .font(.title2)
+                                    
+                                    if let death = character.death {
+                                        AsyncImage(url: death.image) {image in
+                                            image
+                                                .resizable()
+                                                .scaledToFit()
+                                            
+                                        }placeholder: {
+                                            ProgressView()
+                                        }
+                                        Text("How: \(death.details)")
+                                            .padding(.bottom, 7)
+                                        Text("Last words: \"\(death.lastWords)\"")
+                                        
+                                    }
+                                    
+                            }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                      }
+                            .tint(.primary)// primary matches the mode you are in (dark/light)
                         
                     }
                     .frame(width: geo.size.width/1.25,alignment: .leading)
+                    .padding(50)
                 }
                 .scrollIndicators(.hidden)
                 

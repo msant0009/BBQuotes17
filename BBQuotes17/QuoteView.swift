@@ -17,7 +17,7 @@ struct QuoteView: View {
             ZStack{
                 Image(show.lowercased().replacingOccurrences(of: " ", with: ""))
                     .resizable()
-                    .frame(width: geo.size.width*2.7, height: geo.size.height*1.2
+                    .frame(width: geo.size.width*2.7, height: geo.size.height*1.3
                     )
                 
                 VStack { // This outer VStack acts as an anchor to keep button from shifting view to view
