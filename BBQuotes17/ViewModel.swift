@@ -12,7 +12,8 @@ class ViewModel {
     enum fetchStatus {
         case notStarted
         case fetching
-        case success
+        case successQuote
+        case successEpisode
         case failed(error: Error)
     }
     
@@ -37,7 +38,7 @@ class ViewModel {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         character = try! decoder.decode(Character.self, from: characterData)
         
-        let episodeData = try! Data(contentsOf: Bundle.main.url(forResource: "sampleEpisode", withExtension: "json")!)
+        let episodeData = try! Data(contentsOf: Bundle.main.url(forResource: "sampleepisode", withExtension: "json")!)
         episode = try! decoder.decode(Episode.self, from: episodeData)
         
         }
@@ -50,7 +51,7 @@ class ViewModel {
             character = try await fetcher.fetchCharacter(quote.character)
             
             character.death = try await fetcher.fetchDeath(for: character.name)
-            status = .success
+            status = .successQuote
             
         }catch {
             status = .failed(error: error)
@@ -64,7 +65,7 @@ class ViewModel {
         do{
             if let unwrappedEpisode = try await fetcher.fetchEpisode(from: show){
                 episode = unwrappedEpisode
-                status = .success
+                status = .successEpisode
             }
                 
         } catch {
