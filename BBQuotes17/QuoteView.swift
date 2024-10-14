@@ -75,7 +75,7 @@ struct QuoteView: View {
                     Button(){
                         //swift UI is a synchronous environment. Adding the task wrapper allows async funcs to run in a sync environment
                         Task {
-                            await vm.getData(for: show)
+                            await vm.getQuoteData(for: show)
                         }
                             
                         } label: {
